@@ -1,0 +1,56 @@
+<div>
+  <div class="flex-row align-center justify-space-between">
+    <mat-slide-toggle (change)="sortToggle()"
+                      [checked]="sortDirection() === 'asc'"
+                      labelPosition="before">Сортувати А-Я
+    </mat-slide-toggle>
+    <span class="hint total">Знайдено: {{books()?.length}}</span>
+  </div>
+
+
+  <p class="hint">Книги:</p>
+  <div class="flex-row align-center justify-center toggle">
+
+    <mat-button-toggle-group name="books"
+                             aria-label="Books"
+                             [value]="isBought()"
+                             (change)="onIsBought($event)">
+      <mat-button-toggle value="all">Усі книги</mat-button-toggle>
+      <mat-button-toggle value="bought">Куплені</mat-button-toggle>
+      <mat-button-toggle value="notBought">Не куплені</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <mat-form-field class="flex-row width-100 search-panel">
+    <mat-label>Шукати за іменем</mat-label>
+    <input matInput type="text" [formControl]="filterInput">
+    @if (filterInput.value) {
+      <button matSuffix matIconButton aria-label="Clear" (click)="filterInput.reset()">
+        <mat-icon>close</mat-icon>
+      </button>
+    }
+  </mat-form-field>
+
+  <section class="example-section">
+  <span class="example-list-section">
+    <mat-checkbox
+      (change)="update($event)"
+      [checked]="filter().selected"
+      [indeterminate]="partiallyComplete()"
+      class="example-margin">
+      {{ filter().name }}
+    </mat-checkbox>
+  </span>
+    <span class="example-list-section">
+    <ul>
+      @for (subfilter of filter().subfilters; track subfilter; let i = $index) {
+        <li>
+          <mat-checkbox (change)="update($event, i)" [checked]="subfilter.selected">
+            {{ subfilter.name }}
+          </mat-checkbox>
+        </li>
+      }
+    </ul>
+  </span>
+  </section>
+</div>

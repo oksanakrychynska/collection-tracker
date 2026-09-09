@@ -1,0 +1,122 @@
+@use './app/shared/styles/flexbox';
+
+:root {
+  color-scheme: light;
+  --page-text: #1c2d2d;
+  --page-muted: #57706d;
+  --page-surface: rgba(255, 255, 255, 0.78);
+  --page-surface-strong: #ffffff;
+  --page-border: rgba(43, 68, 67, 0.14);
+  --page-shadow: rgba(33, 57, 62, 0.1);
+  --page-toolbar: #0d9e6e;
+  --page-toolbar-text: #f7fffb;
+  --app-toolbar-height: 72px;
+  --page-background:
+    radial-gradient(circle at 8% 8%, rgba(33, 182, 123, 0.16), transparent 28rem),
+    radial-gradient(circle at 92% 14%, rgba(255, 118, 79, 0.16), transparent 30rem),
+    linear-gradient(135deg, #f6faf8 0%, #ecf3f2 48%, #f7f3ee 100%);
+}
+
+html[data-theme='dark'] {
+  color-scheme: dark;
+  --page-text: #e4f1ed;
+  --page-muted: #a9c0ba;
+  --page-surface: rgba(25, 44, 42, 0.88);
+  --page-surface-strong: #203936;
+  --page-border: rgba(181, 224, 210, 0.16);
+  --page-shadow: rgba(0, 0, 0, 0.32);
+  --page-toolbar: #173f36;
+  --page-toolbar-text: #f3fffb;
+  --page-background:
+    radial-gradient(circle at 8% 8%, rgba(48, 173, 126, 0.2), transparent 28rem),
+    radial-gradient(circle at 92% 14%, rgba(238, 111, 85, 0.15), transparent 30rem),
+    linear-gradient(135deg, #10201f 0%, #162d2a 48%, #1d2928 100%);
+}
+
+html, body {
+  height: 100%;
+}
+
+html {
+  font-size: clamp(14px, 1vw + 10px, 16px);
+}
+
+@media (max-width: 767px) {
+  :root { --app-toolbar-height: 64px; }
+}
+
+body {
+  margin: 0;
+  background: var(--page-background);
+  color: var(--page-text);
+  font-family: Inter, Roboto, "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background 220ms ease, color 220ms ease;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+[role='button'] {
+  font: inherit;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 300,
+    'GRAD' 0,
+    'opsz' 24;
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.icon-filled {
+  font-variation-settings: 'FILL' 1;
+}
+
+.icon-bold {
+  font-variation-settings: 'wght' 700;
+}
+
+html[data-theme='dark'] {
+  .app-toolbar {
+    --mat-toolbar-container-background-color: #173f36;
+    --mat-toolbar-container-text-color: #f3fffb;
+  }
+
+  .books-page .search-panel,
+  .books-page .books-summary,
+  .books-page .book-card,
+  .books-page .empty-state,
+  .collections .example-list,
+  .collections .example-box {
+    border-color: var(--page-border);
+    background: var(--page-surface);
+    box-shadow: 0 18px 44px var(--page-shadow);
+    color: var(--page-text);
+  }
+
+  .books-page .book-content h2,
+  .collections .collection-copy span {
+    color: var(--page-text);
+  }
+
+  .books-page .book-author,
+  .books-page .books-summary p,
+  .books-page .book-meta dd,
+  .books-page .filters-panel span {
+    color: var(--page-muted);
+  }
+
+  .books-page .filters-panel select,
+  .books-page .filters-panel button {
+    border-color: var(--page-border);
+    background: var(--page-surface-strong);
+    color: var(--page-text);
+  }
+}

@@ -1,0 +1,116 @@
+/* ==========================================================================
+   Colors
+   ========================================================================== */
+
+$white: #ffffff;
+
+$primary: #21b67b;
+$primary-dark: #28765c;
+
+$text-primary: #172927;
+$text-secondary: #57706d;
+$text-label: #314845;
+
+$error: #bf2541;
+
+$background-start: #e9f8ef;
+$background-end: #f8fbfa;
+
+$border: #2b444340;
+$card-border: #2b44431f;
+$shadow: #21393e24;
+
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.login-page {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  background: var(--page-background);
+}
+
+.login-card {
+  display: grid;
+  gap: 16px;
+  width: min(100%, 400px);
+  padding: 32px;
+  background: var(--page-surface);
+  border: 1px solid var(--page-border);
+  border-radius: 12px;
+  box-shadow: 0 24px 60px var(--page-shadow);
+}
+
+
+h1,
+.eyebrow,
+.intro,
+.hint,
+small,
+.login-error {
+  margin: 0;
+}
+
+h1 {
+  color: var(--page-text);
+}
+
+.eyebrow {
+  color: #168054;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.intro,
+.hint {
+  color: var(--page-muted);
+}
+
+.hint {
+  font-size: 13px;
+  text-align: center;
+}
+
+small,
+.login-error {
+  color: #bf2541;
+  font-size: 13px;
+}
+
+label {
+  display: grid;
+  gap: 7px;
+  color: var(--page-text);
+  font-weight: 500;
+}
+
+input {
+  box-sizing: border-box;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--page-border);
+  border-radius: 8px;
+  background: var(--page-surface-strong);
+  color: var(--page-text);
+  font: inherit;
+}
+
+button {
+  min-height: 46px;
+  border: 0;
+  border-radius: 8px;
+  background: #21b67b;
+  color: #ffffff;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}

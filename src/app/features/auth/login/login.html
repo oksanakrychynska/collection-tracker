@@ -1,0 +1,29 @@
+
+<main class="login-page">
+  <form class="login-card" (submit)="submit(); $event.preventDefault()" novalidate>
+    <p class="eyebrow">Awesome Collection</p>
+
+    <label>
+      <span>Email</span>
+      <input type="email" autocomplete="email" [formField]="loginForm.email">
+      @if (loginForm.email().touched() && loginForm.email().invalid()) {
+        <small>{{ loginForm.email().errors()[0].message }}</small>
+      }
+    </label>
+
+    <label>
+      <span>Password</span>
+      <input type="password" autocomplete="current-password" [formField]="loginForm.password">
+      @if (loginForm.password().touched() && loginForm.password().invalid()) {
+        <small>{{ loginForm.password().errors()[0].message }}</small>
+      }
+    </label>
+
+    @if (loginError()) {
+      <p class="login-error" role="alert">{{ loginError() }}</p>
+    }
+
+    <button type="submit">Log in</button>
+    <p class="hint">Demo: test&#64;test.com / 12345</p>
+  </form>
+</main>

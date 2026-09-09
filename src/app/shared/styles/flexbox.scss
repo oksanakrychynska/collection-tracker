@@ -1,0 +1,89 @@
+$width-steps: (
+  15, 20, 25, 30, 35, 40, 45, 50,
+  55, 60, 65, 70, 80, 90, 95, 100
+);
+
+$gap-values: (3, 5, 10);
+
+$justify-values: (
+  start: flex-start,
+  center: center,
+  end: flex-end,
+  space-between: space-between,
+  space-evenly: space-evenly
+);
+
+// Flex align-items options
+$align-values: (
+  start: flex-start,
+  center: center,
+  end: flex-end
+);
+
+
+@mixin flex-container(
+  $direction: row,
+  $wrap: nowrap,
+  $justify: normal,
+  $align: normal,
+  $content: normal
+) {
+  display: flex;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+  justify-content: $justify;
+  align-items: $align;
+  align-content: $content;
+}
+
+.flex-container-default {
+  @include flex-container();
+}
+
+.flex-row {
+  @include flex-container(row);
+}
+
+.flex-column {
+  @include flex-container(column);
+}
+
+@each $key, $value in $justify-values {
+  .justify-#{$key} {
+    justify-content: $value;
+  }
+}
+
+@each $key, $value in $align-values {
+  .align-#{$key} {
+    align-items: $value;
+  }
+}
+
+
+@each $w in $width-steps {
+  .width-#{$w} {
+    width: #{$w + "%"};
+  }
+}
+
+@each $g in $gap-values {
+  .gap-#{$g} {
+    gap: #{$g + "%"};
+  }
+}
+
+
+@media (max-width: 768px) {
+  @each $w in $width-steps {
+    .width-md-#{$w} {
+      width: #{$w + "%"};
+    }
+  }
+
+  @each $g in $gap-values {
+    .gap-md-#{$g} {
+      gap: #{$g + "%"};
+    }
+  }
+}
