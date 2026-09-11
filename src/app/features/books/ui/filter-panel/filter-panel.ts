@@ -24,7 +24,6 @@ export interface Filter {
     MatButtonToggleGroup,
     MatButtonToggle,
     ReactiveFormsModule,
-    MatButton,
     MatDivider,
   ],
   templateUrl: './filter-panel.html',
