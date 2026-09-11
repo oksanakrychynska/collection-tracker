@@ -17,10 +17,11 @@ import {MatDialog} from '@angular/material/dialog';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {map} from 'rxjs';
 import {MatButton, MatFabButton, MatIconButton} from '@angular/material/button';
+import {SearchPanel} from '../search-panel/search-panel';
 
 @Component({
   selector: 'app-books',
-  imports: [FilterPanel, MatDrawer, MatDrawerContainer, MatDrawerContent, MatList, MatListItem, MatIcon, MatListItemIcon, MatDivider, NgClass, MatTooltip, MatCheckbox, MatToolbarRow, MatButton, MatIconButton, MatFabButton],
+  imports: [FilterPanel, MatDrawer, MatDrawerContainer, MatDrawerContent, MatList, MatListItem, MatIcon, MatListItemIcon, MatDivider, NgClass, MatTooltip, MatCheckbox, MatToolbarRow, MatButton, MatIconButton, MatFabButton, SearchPanel],
   templateUrl: './books.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './books.scss',

@@ -21,16 +21,6 @@
     </mat-button-toggle-group>
   </div>
 
-  <mat-form-field class="flex-row width-100 search-panel">
-    <mat-label>Шукати за іменем</mat-label>
-    <input matInput type="text" [formControl]="filterInput">
-    @if (filterInput.value) {
-      <button matSuffix matIconButton aria-label="Clear" (click)="filterInput.reset()">
-        <mat-icon>close</mat-icon>
-      </button>
-    }
-  </mat-form-field>
-
   <section class="example-section">
   <span class="example-list-section">
     <mat-checkbox
@@ -53,4 +43,7 @@
     </ul>
   </span>
   </section>
+
+  <mat-divider></mat-divider>
+
 </div>

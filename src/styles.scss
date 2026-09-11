@@ -53,6 +53,7 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   transition: background 220ms ease, color 220ms ease;
+  overflow: hidden;
 }
 
 * {
@@ -89,7 +90,7 @@ html[data-theme='dark'] {
     --mat-toolbar-container-text-color: #f3fffb;
   }
 
-  .books-page .search-panel,
+  .books-page .search-toolbar,
   .books-page .books-summary,
   .books-page .book-card,
   .books-page .empty-state,
@@ -118,5 +119,11 @@ html[data-theme='dark'] {
     border-color: var(--page-border);
     background: var(--page-surface-strong);
     color: var(--page-text);
+  }
+
+  mat-form-field {
+    --mat-form-field-filled-container-color: var(--page-surface);
+    --mat-form-field-filled-input-text-color: var(--page-text);
+    --mat-form-field-filled-label-text-color: var(--page-muted);
   }
 }

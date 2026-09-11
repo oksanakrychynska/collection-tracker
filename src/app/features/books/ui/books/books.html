@@ -1,19 +1,26 @@
 <mat-drawer-container class="example-container">
   <mat-drawer [mode]="isMobile() ? 'over' : 'side'"
               [opened]="!isMobile() || filtersOpen()"
-              (openedChange)="filtersOpen.set($event)">
+              (openedChange)="filtersOpen.set($event)" #drawer>
     <app-filter-panel
       [books]="sortedBooks()"
       [series]=this.series()
       [isBought]="isBoughtFilter()"
       [sortDirection]="sortDirection()"
-      (search)="onSearch($event)"
+
       (onBoughtChange)="onBoughtFilterChange($event)"
       (onSeriaChange)="onSeriaFilterChange($event)"
       (onSortChange)="sortToggle()"></app-filter-panel>
+
+    <div class="flex-row align-center justify-end close-button">
+      <button mat-flat-button (click)="drawer.close()">Close</button>
+    </div>
   </mat-drawer>
   <mat-drawer-content>
-    <mat-toolbar-row class="books-actions">
+    <mat-toolbar-row class="flex-row align-center justify-space-between search-toolbar">
+
+      <app-search-panel (search)="onSearch($event)"></app-search-panel>
+
       <button matButton="outlined"
               class="mobile-filter-toggle"
               type="button"
@@ -33,13 +40,14 @@
       </button>
     </mat-toolbar-row>
 
-    <mat-list>
-      @for (book of sortedBooks(); track book.id) {
-        <mat-list-item class="book-list-item">
-          <div class="book-row">
+    <div class="books-list-container">
+      <mat-list>
+        @for (book of sortedBooks(); track book.id) {
+          <mat-list-item class="book-list-item">
+            <div class="book-row">
              <span class="book-identity">
                <mat-icon matListItemIcon class="circle"
-               [ngClass]="{
+                         [ngClass]="{
                'green': book.seria === Seria.Kanon,
                'orange': book.seria === Seria.VivatClassic,
                'aqua': book.seria === Seria.Dune,
@@ -53,22 +61,23 @@
                </span>
 
              </span>
-            <span class="book-author">
+              <span class="book-author">
               <span>{{ book.author.length > 70 ? `Збірка авторів` : book.author }}</span>
             </span>
-            <span class="book-status">
+              <span class="book-status">
               <mat-checkbox [checked]="book.bought"></mat-checkbox>
               <mat-checkbox [checked]="book.hadRead"></mat-checkbox>
             </span>
+            </div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        } @empty {
+          <div class="flex-row align-center justify-center empty">
+            <p> List is empty</p>
           </div>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-      } @empty {
-        <div class="flex-row align-center justify-center empty">
-          <p> List is empty</p>
-        </div>
-      }
-    </mat-list>
+        }
+      </mat-list>
+    </div>
 
     <button mat-fab
             class="mobile-add-book"

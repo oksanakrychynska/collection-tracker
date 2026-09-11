@@ -2,12 +2,12 @@
 
 :host {
   display: block;
+  height: calc(100dvh - var(--app-toolbar-height));
   color: var(--page-text);
-  min-height: calc(100dvh - var(--app-toolbar-height));
 
   .example-container {
     width: 100%;
-    min-height: calc(100dvh - var(--app-toolbar-height));
+    height: 100%;
     background: var(--page-surface);
     background: transparent;
   }
@@ -19,12 +19,39 @@
     color: var(--page-text);
   }
 
+  .mat-drawer-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .books-list-container {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+  }
+
   mat-list-item, mat-list {
     width: 100%;
   }
 
   mat-list {
     padding: 0 12px 24px;
+    margin-top: 12px;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  .search-toolbar {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    height: 70px;
+  }
+
+  .close-button {
+    margin-top: 10px;
+    margin-right: 10px;
   }
 
   .circle {

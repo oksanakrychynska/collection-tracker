@@ -1,14 +1,11 @@
-import {Component, computed, effect, Input, input, output, signal} from '@angular/core';
+import {Component, computed, effect, input, output, signal} from '@angular/core';
 import {MatCheckbox, MatCheckboxChange} from '@angular/material/checkbox';
 import {MatSlideToggle} from '@angular/material/slide-toggle';
 import {MatButtonToggle, MatButtonToggleChange, MatButtonToggleGroup} from '@angular/material/button-toggle';
-import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
-import {FormControl, ReactiveFormsModule} from '@angular/forms';
-import {MatIconButton} from '@angular/material/button';
-import {MatIcon} from '@angular/material/icon';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {debounceTime, distinctUntilChanged} from 'rxjs';
+import {ReactiveFormsModule} from '@angular/forms';
 import {Book} from '../../models/book';
+import {MatButton} from '@angular/material/button';
+import {MatDivider} from '@angular/material/list';
 
 export interface Filter {
   name: string;
@@ -26,12 +23,9 @@ export interface Filter {
     MatSlideToggle,
     MatButtonToggleGroup,
     MatButtonToggle,
-    MatFormField,
-    MatLabel,
-    MatInput,
     ReactiveFormsModule,
-    MatIconButton,
-    MatIcon
+    MatButton,
+    MatDivider,
   ],
   templateUrl: './filter-panel.html',
   styleUrl: './filter-panel.scss',
@@ -60,10 +54,6 @@ export class FilterPanel {
   readonly onSortChange = output();
   readonly onBoughtChange = output<string>();
   readonly onSeriaChange = output<Filter>();
-  readonly search = output<string>();
-  public filterInput = new FormControl('', {
-    nonNullable: true
-  });
 
   constructor() {
     effect(() => {
@@ -74,14 +64,6 @@ export class FilterPanel {
           selected: true,
         })),
       }));
-    });
-
-    this.filterInput.valueChanges.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      takeUntilDestroyed()
-    ).subscribe(value => {
-      this.search.emit(value);
     });
   }
 
