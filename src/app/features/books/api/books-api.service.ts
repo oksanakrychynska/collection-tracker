@@ -1,22 +1,40 @@
-import {inject, Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 import {Book} from '../models/book';
-import {map} from 'rxjs';
+import {Observable} from 'rxjs';
+import {db} from '../../../firestore';
+import {
+  collection,
+  onSnapshot
+} from 'firebase/firestore';
+
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class BooksApiService  {
-  private readonly http = inject(HttpClient);
 
-  getBooks() {
-    return this.http.get<Book[]>('./books.json').pipe(
-      map(books => books.map((book, index) => ({
-          ...book,
-          id: index + 1,
-        }))
-      )
-    );
+  private booksCollection = collection(db, 'books');
+
+  getBooks(): Observable<Book[]> {
+    return new Observable<Book[]>(subscriber => {
+      return onSnapshot(
+        this.booksCollection,
+        snapshot => {
+          console.log('FIRESTORE SNAPSHOT:', snapshot);
+
+          const books = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+          } as Book));
+
+          subscriber.next(books);
+        },
+        error => {
+          console.error('FIRESTORE ERROR:', error);
+          subscriber.error(error);
+        }
+      );
+    });
   }
 }
