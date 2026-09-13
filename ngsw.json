@@ -1,0 +1,93 @@
+{
+  "configVersion": 1,
+  "timestamp": 1789307946407,
+  "index": "/collection-tracker/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/collection-tracker/chunk-CROYHT3L.js",
+        "/collection-tracker/chunk-HG3UKWIM.js",
+        "/collection-tracker/chunk-HRHWF45W.js",
+        "/collection-tracker/chunk-JDUROJ2Q.js",
+        "/collection-tracker/chunk-QIZOR3PZ.js",
+        "/collection-tracker/chunk-ST7WIHZC.js",
+        "/collection-tracker/chunk-VSKCJGKQ.js",
+        "/collection-tracker/chunk-W5H4SXXD.js",
+        "/collection-tracker/favicon.ico",
+        "/collection-tracker/index.html",
+        "/collection-tracker/main-ZNNIWHNX.js",
+        "/collection-tracker/manifest.webmanifest",
+        "/collection-tracker/styles-J6NVURPJ.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/collection-tracker/icons/icon-128x128.png",
+        "/collection-tracker/icons/icon-144x144.png",
+        "/collection-tracker/icons/icon-152x152.png",
+        "/collection-tracker/icons/icon-192x192.png",
+        "/collection-tracker/icons/icon-384x384.png",
+        "/collection-tracker/icons/icon-515x512.png",
+        "/collection-tracker/icons/icon-72x72.png",
+        "/collection-tracker/icons/icon-96x96.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/collection-tracker/chunk-CROYHT3L.js": "c955b0c8f23bda82dfb73ad0696304e03719d937",
+    "/collection-tracker/chunk-HG3UKWIM.js": "b406fb9ff0673c90de7e9b3f22876da6d1fcaa62",
+    "/collection-tracker/chunk-HRHWF45W.js": "72288f37812dfad53578bf617cc399a85eccd48d",
+    "/collection-tracker/chunk-JDUROJ2Q.js": "610aeaa1095a50b47d1c27d2d19c5a5d17f3893f",
+    "/collection-tracker/chunk-QIZOR3PZ.js": "49d0321690ad51a12d66732085d988ffeb2fdcfd",
+    "/collection-tracker/chunk-ST7WIHZC.js": "7d9f0bb5927a428311a5d53ff224a52545d94f75",
+    "/collection-tracker/chunk-VSKCJGKQ.js": "7dfa0781929ee141d795c085291deefed1c3348f",
+    "/collection-tracker/chunk-W5H4SXXD.js": "c82e6740948eeec002f613d980af9c599fd58239",
+    "/collection-tracker/favicon.ico": "ccb17f8fd2608b88f45b6294c132505ac9b097bd",
+    "/collection-tracker/icons/icon-128x128.png": "19e120cdc461b70b969431eaec8db9c42f8f6232",
+    "/collection-tracker/icons/icon-144x144.png": "249670817ec3301676b808016b40746410f607a1",
+    "/collection-tracker/icons/icon-152x152.png": "b39f1842ab2ed476da93756e934348466ee7daa4",
+    "/collection-tracker/icons/icon-192x192.png": "8fc8a844720443cee5f3972d61f103fedd928e34",
+    "/collection-tracker/icons/icon-384x384.png": "0911e60c57eb981306700c23b6709c8ddd8e53be",
+    "/collection-tracker/icons/icon-515x512.png": "cbf407d4a0c171abaef084607d2380d4a7b3214c",
+    "/collection-tracker/icons/icon-72x72.png": "52ffb514cac0b72fa8f46e7ce630da2f4599267c",
+    "/collection-tracker/icons/icon-96x96.png": "3843e7995d5d06165e600f7cf80d0cae7f8b6a09",
+    "/collection-tracker/index.html": "f1525036d9830183f21df2e114daa291a26489e4",
+    "/collection-tracker/main-ZNNIWHNX.js": "5531d60b3871710bbdf36335a36e5847c3c5cb93",
+    "/collection-tracker/manifest.webmanifest": "1e429767c3dbc71a92b32ea530b52197c29fd894",
+    "/collection-tracker/styles-J6NVURPJ.css": "032e256f1b3cfb4094c6928d3c6bc32108764ee5"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
