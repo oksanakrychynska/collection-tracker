@@ -33,7 +33,7 @@
   </span>
     <span class="example-list-section">
     <ul>
-      @for (subfilter of filter().subfilters; track subfilter; let i = $index) {
+      @for (subfilter of filter().subfilters; track subfilter.name; let i = $index) {
         <li>
           <mat-checkbox (change)="update($event, i)" [checked]="subfilter.selected">
             {{ subfilter.name }}

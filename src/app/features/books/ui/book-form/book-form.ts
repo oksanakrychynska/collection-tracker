@@ -1,8 +1,8 @@
-import {Component, signal} from '@angular/core';
+import {Component, inject, signal} from '@angular/core';
 import {
   MatDialogActions,
   MatDialogClose,
-  MatDialogContent,
+  MatDialogContent, MatDialogRef,
   MatDialogTitle
 } from '@angular/material/dialog';
 import {MatButton} from '@angular/material/button';
@@ -42,6 +42,7 @@ interface BookFormData {
 })
 
 export class BookForm {
+  dialogRef = inject(MatDialogRef);
   readonly bookFormModel = signal<BookFormData>({
     name: '',
     author: '',
@@ -59,8 +60,9 @@ export class BookForm {
   });
 
   save(): void {
-    console.log('SAVE CLICKED');
-    console.log(this.bookForm);
-    console.log(this.bookFormModel());
+    if (this.bookForm().valid()) {
+      this.dialogRef.close(this.bookFormModel());
+    }
+
   }
 }

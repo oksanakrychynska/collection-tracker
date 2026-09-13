@@ -1,19 +1,19 @@
 <mat-drawer-container class="example-container">
-  <mat-drawer [mode]="isMobile() ? 'over' : 'side'"
-              [opened]="!isMobile() || filtersOpen()"
-              (openedChange)="filtersOpen.set($event)" #drawer>
+  <mat-drawer #drawer
+              (openedChange)="filtersOpen.set($event)"
+              [mode]="isMobile() ? 'over' : 'side'" [opened]="!isMobile() || filtersOpen()">
     <app-filter-panel
-      [books]="sortedBooks()"
-      [series]=this.series()
-      [isBought]="isBoughtFilter()"
-      [sortDirection]="sortDirection()"
-
       (onBoughtChange)="onBoughtFilterChange($event)"
       (onSeriaChange)="onSeriaFilterChange($event)"
-      (onSortChange)="sortToggle()"></app-filter-panel>
+      (onSortChange)="sortToggle()"
+      [books]="sortedBooks()"
+
+      [isBought]="isBoughtFilter()"
+      [series]=this.series()
+      [sortDirection]="sortDirection()"></app-filter-panel>
 
     <div class="flex-row align-center justify-end close-button">
-      <button mat-flat-button (click)="drawer.close()">Close</button>
+      <button (click)="drawer.close()" mat-flat-button>Close</button>
     </div>
   </mat-drawer>
   <mat-drawer-content>
@@ -21,21 +21,21 @@
 
       <app-search-panel (search)="onSearch($event)"></app-search-panel>
 
-      <button matButton="outlined"
-              class="mobile-filter-toggle"
-              type="button"
+      <button (click)="toggleFilters()"
               [attr.aria-expanded]="filtersOpen()"
-              (click)="toggleFilters()">
+              class="mobile-filter-toggle"
+              matButton="outlined"
+              type="button">
         <mat-icon>{{ filtersOpen() ? 'close' : 'tune' }}</mat-icon>
         Filters
       </button>
 
-      <button mat-icon-button
-              class="desktop-add-book"
-              type="button"
-              aria-label="Add book"
+      <button (click)="openBookForm()"
               [matTooltip]="'Додати книжку'"
-              (click)="openBookForm()">
+              aria-label="Add book"
+              class="desktop-add-book"
+              mat-icon-button
+              type="button">
         <mat-icon>add_circle</mat-icon>
       </button>
     </mat-toolbar-row>
@@ -46,29 +46,37 @@
           <mat-list-item class="book-list-item">
             <div class="book-row">
              <span class="book-identity">
-               <mat-icon matListItemIcon class="circle"
-                         [ngClass]="{
+               <mat-icon [ngClass]="{
                'green': book.seria === Seria.Kanon,
                'orange': book.seria === Seria.VivatClassic,
                'aqua': book.seria === Seria.Dune,
                'shire': book.seria === Seria.Tolkien,
                'coral': book.seria === Seria.GiftClassic,
-               'blue': book.seria === Seria.DiscWorld}"
+               'blue': book.seria === Seria.DiscWorld}" class="circle"
+                         matListItemIcon
                >circle</mat-icon>
                <span class="flex-column">
-                  <span class="truncate" [matTooltip]="book.name.length > 26 ? book.name : ''">{{ book.name }}</span>
-               <span class="seria">{{book.seria}}</span>
+                  <span [matTooltip]="book.name.length > 26 ? book.name : ''" class="truncate">{{ book.name }}</span>
+               <span class="seria">{{ book.seria }}</span>
                </span>
 
              </span>
               <span class="book-author">
-              <span>{{ book.author.length > 70 ? `Збірка авторів` : book.author }}</span>
-            </span>
+                <span>{{ book.author.length > 70 ? `Збірка авторів` : book.author }}</span>
+              </span>
               <span class="book-status">
-              <mat-checkbox [checked]="book.bought"></mat-checkbox>
-              <mat-checkbox [checked]="book.hadRead"></mat-checkbox>
-            </span>
+                <mat-checkbox [checked]="book.bought" (change)="updateBook(book, 'bought', $event)"></mat-checkbox>
+                <mat-checkbox [checked]="book.hadRead" (change)="updateBook(book, 'hadRead', $event)"></mat-checkbox>
+                 <button matIconButton
+                         [matTooltip]="'Видалити зі списку'"
+                         [disabled]="book.bought"
+                         (click)="deleteBook(book.id)"
+                         class="delete-button">
+                   <mat-icon>delete</mat-icon>
+                 </button>
+              </span>
             </div>
+
           </mat-list-item>
           <mat-divider></mat-divider>
         } @empty {
@@ -79,11 +87,11 @@
       </mat-list>
     </div>
 
-    <button mat-fab
-            class="mobile-add-book"
-            type="button"
+    <button (click)="openBookForm()"
             aria-label="Додати книжку"
-            (click)="openBookForm()">
+            class="mobile-add-book"
+            mat-fab
+            type="button">
       <mat-icon>add</mat-icon>
     </button>
   </mat-drawer-content>

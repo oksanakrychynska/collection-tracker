@@ -10,7 +10,7 @@ import {MatDivider, MatList, MatListItem, MatListItemIcon} from '@angular/materi
 import {MatIcon} from '@angular/material/icon';
 import {NgClass} from '@angular/common';
 import {MatTooltip} from '@angular/material/tooltip';
-import {MatCheckbox} from '@angular/material/checkbox';
+import {MatCheckbox, MatCheckboxChange} from '@angular/material/checkbox';
 import {MatToolbarRow} from '@angular/material/toolbar';
 import {BookForm} from '../book-form/book-form';
 import {MatDialog} from '@angular/material/dialog';
@@ -138,16 +138,26 @@ export class Books {
     this.isBoughtFilter.set(event)
   }
 
-  openBookForm(): void {
+  async openBookForm() {
     const dialogRef = this.dialog.open(BookForm, {
       data: {},
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      if (result !== undefined) {
-        // this.animal.set(result);
+      if (result) {
+       this.booksService.addBook(result);
       }
     });
+  }
+
+  protected async deleteBook(id: string) {
+    await this.booksService.deleteBook(id);
+  }
+
+
+  protected async updateBook(book: Book, field: string, event: MatCheckboxChange) {
+    const changes = {[field]: event.checked};
+    await this.booksService.updateBook(book.id, changes);
+
   }
 }
