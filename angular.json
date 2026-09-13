@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "awesome-collection": {
+    "collection-tracker": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -60,10 +60,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "awesome-collection:build:production"
+              "buildTarget": "collection-tracker:build:production"
             },
             "development": {
-              "buildTarget": "awesome-collection:build:development"
+              "buildTarget": "collection-tracker:build:development"
             }
           },
           "defaultConfiguration": "development"
