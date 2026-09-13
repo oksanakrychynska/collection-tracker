@@ -2,24 +2,35 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  OnDestroy, output,
+  OnDestroy,
   ViewChild,
+  signal,
 } from '@angular/core';
 
-import { BrowserMultiFormatReader } from '@zxing/browser';
-import { BarcodeFormat, DecodeHintType } from '@zxing/library';
+import {
+  BrowserMultiFormatReader,
+  IScannerControls,
+} from '@zxing/browser';
 
 @Component({
   selector: 'app-book-scanner',
+  standalone: true,
   templateUrl: './book-scanner.html',
   styleUrl: './book-scanner.scss',
 })
 export class BookScanner implements AfterViewInit, OnDestroy {
-  @ViewChild('video') video!: ElementRef<HTMLVideoElement>;
+
+  @ViewChild('video')
+  video!: ElementRef<HTMLVideoElement>;
+
+  readonly barcode = signal<string | null>(null);
 
   private stream?: MediaStream;
+
   private reader = new BrowserMultiFormatReader();
-  readonly closed = output<void>();
+
+  private controls?: IScannerControls;
+
 
   async ngAfterViewInit(): Promise<void> {
     try {
@@ -35,32 +46,37 @@ export class BookScanner implements AfterViewInit, OnDestroy {
       await this.video.nativeElement.play();
 
       this.startScanning();
+
     } catch (error) {
       console.error('Camera access error:', error);
     }
   }
 
-  private async startScanning() {
-    await this.reader.decodeFromVideoDevice(
+
+  private async startScanning(): Promise<void> {
+    this.controls = await this.reader.decodeFromVideoDevice(
       undefined,
       this.video.nativeElement,
-      (result, error) => {
-        if (result) {
-          console.log('BARCODE:', result.getText());
-        }
-
-        if (error) {
-          // Тут нічого не робимо.
-          // ZXing постійно намагається знайти barcode.
+      (result) => {
+        if (result && !this.barcode()) {
+          const value = result.getText();
+          console.log('BARCODE:', value);
+          this.barcode.set(value);
+          this.controls?.stop();
+          this.stream?.getTracks().forEach(track => track.stop());
+          this.stream = undefined;
         }
       },
     );
   }
 
+
   close(): void {
+    this.controls?.stop();
     this.stream?.getTracks().forEach(track => track.stop());
     this.stream = undefined;
   }
+
 
   ngOnDestroy(): void {
     this.close();
