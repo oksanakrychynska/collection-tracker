@@ -43,6 +43,22 @@
       </mat-form-field>
 
       <div class="flex-row align-center justify-space-between">
+        <p>Сканувати штрих-код</p>
+        @if (!scannerOpened()) {
+          <button type="button"
+                  mat-icon-button
+                  (click)="scannerOpened.set(true)">
+            <mat-icon>barcode_scanner</mat-icon>
+          </button>
+        }
+        @if (isMobile() && scannerOpened()) {
+          <app-book-scanner (closed)="scannerOpened.set(false)" />
+        }
+
+      </div>
+
+
+      <div class="flex-row align-center justify-space-between">
         <mat-slide-toggle [formField]="bookForm.bought">Уже куплена</mat-slide-toggle>
         <mat-slide-toggle [formField]="bookForm.hadRead">Ще не куплена</mat-slide-toggle>
 

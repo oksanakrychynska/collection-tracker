@@ -6,12 +6,14 @@ import {
   MatDialogContent, MatDialogRef,
   MatDialogTitle
 } from '@angular/material/dialog';
-import {MatButton} from '@angular/material/button';
+import {MatButton, MatIconButton} from '@angular/material/button';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatError, MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {MatSlideToggle} from '@angular/material/slide-toggle';
 import {form, FormField, required} from '@angular/forms/signals';
 import {MatAutocomplete, MatAutocompleteTrigger, MatOption} from '@angular/material/autocomplete';
+import {BookScanner} from '../book-scanner/book-scanner';
+import {MatIcon} from '@angular/material/icon';
 
 interface BookFormData {
   name: string;
@@ -40,7 +42,10 @@ interface BookFormData {
     FormsModule,
     MatAutocompleteTrigger,
     MatAutocomplete,
-    MatOption
+    MatOption,
+    BookScanner,
+    MatIconButton,
+    MatIcon
   ],
   templateUrl: './book-form.html',
   styleUrl: './book-form.scss',
@@ -49,6 +54,12 @@ interface BookFormData {
 export class BookForm {
   public data = inject<any>(MAT_DIALOG_DATA);
   public dialogRef = inject(MatDialogRef);
+
+  readonly scannerOpened = signal(false);
+  readonly isMobile = signal(
+    window.matchMedia('(pointer: coarse)').matches &&
+    window.innerWidth <= 1024
+  );
   readonly bookFormModel = signal<BookFormData>({
     name: '',
     author: '',
