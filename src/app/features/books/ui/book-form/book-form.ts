@@ -1,5 +1,6 @@
 import {Component, inject, signal} from '@angular/core';
 import {
+  MAT_DIALOG_DATA,
   MatDialogActions,
   MatDialogClose,
   MatDialogContent, MatDialogRef,
@@ -10,6 +11,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatError, MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {MatSlideToggle} from '@angular/material/slide-toggle';
 import {form, FormField, required} from '@angular/forms/signals';
+import {MatAutocomplete, MatAutocompleteTrigger, MatOption} from '@angular/material/autocomplete';
 
 interface BookFormData {
   name: string;
@@ -35,14 +37,18 @@ interface BookFormData {
     MatError,
     MatSlideToggle,
     FormField,
-    FormsModule
+    FormsModule,
+    MatAutocompleteTrigger,
+    MatAutocomplete,
+    MatOption
   ],
   templateUrl: './book-form.html',
   styleUrl: './book-form.scss',
 })
 
 export class BookForm {
-  dialogRef = inject(MatDialogRef);
+  public data = inject<any>(MAT_DIALOG_DATA);
+  public dialogRef = inject(MatDialogRef);
   readonly bookFormModel = signal<BookFormData>({
     name: '',
     author: '',

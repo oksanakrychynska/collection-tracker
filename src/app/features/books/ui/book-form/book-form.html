@@ -1,52 +1,55 @@
 <form novalidate (ngSubmit)="save()">
   <h2 mat-dialog-title>Додати книжку</h2>
-  <mat-dialog-content>
-    <mat-form-field appearance="outline" class="width-100">
-      <mat-label>Назва</mat-label>
-      <input [formField]="bookForm.name"
-             matInput>
+    <div mat-dialog-content>
+      <mat-form-field appearance="outline" class="width-100">
+        <mat-label>Назва</mat-label>
+        <input [formField]="bookForm.name"
+               matInput>
 
-      @if (bookForm.name().invalid() && bookForm.name().touched()) {
-        <mat-error>Це обов'язкове поле</mat-error>
-      }
-    </mat-form-field>
+        @if (bookForm.name().invalid() && bookForm.name().touched()) {
+          <mat-error>Це обов'язкове поле</mat-error>
+        }
+      </mat-form-field>
 
+      <mat-form-field appearance="outline" class="width-100">
+        <mat-label>Автор</mat-label>
+        <input [formField]="bookForm.author" matInput>
 
-    <mat-form-field appearance="outline" class="width-100">
-      <mat-label>Автор</mat-label>
-      <input [formField]="bookForm.author" matInput>
+        @if (bookForm.author().invalid() && bookForm.author().touched()) {
+          <mat-error>Це обов'язкове поле</mat-error>
+        }
+      </mat-form-field>
 
-      @if (bookForm.author().invalid() && bookForm.author().touched()) {
-        <mat-error>Це обов'язкове поле</mat-error>
-      }
-    </mat-form-field>
+      <mat-form-field appearance="outline" class="width-100">
+        <mat-label>Серія</mat-label>
+        <input [formField]="bookForm.seria"
+               matInput
+               [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          @for (option of data.series; track option) {
+            <mat-option [value]="option">{{option}}</mat-option>
+          }
+        </mat-autocomplete>
+      </mat-form-field>
 
-    <mat-form-field appearance="outline" class="width-100">
-      <mat-label>Серія</mat-label>
-      <input [formField]="bookForm.seria"
-             matInput>
+      <mat-form-field appearance="outline" class="width-100">
+        <mat-label>Видавець</mat-label>
+        <input [formField]="bookForm.publisher"
+               matInput>
 
-      @if (bookForm.seria().invalid() && bookForm.seria().touched()) {
-        <mat-error>Це обов'язкове поле</mat-error>
-      }
-    </mat-form-field>
+        @if (bookForm.publisher().invalid() && bookForm.publisher().touched()) {
+          <mat-error>Це обов'язкове поле</mat-error>
+        }
+      </mat-form-field>
 
-    <mat-form-field appearance="outline" class="width-100">
-      <mat-label>Видавець</mat-label>
-      <input [formField]="bookForm.publisher"
-             matInput>
+      <div class="flex-row align-center justify-space-between">
+        <mat-slide-toggle [formField]="bookForm.bought">Уже куплена</mat-slide-toggle>
+        <mat-slide-toggle [formField]="bookForm.hadRead">Ще не куплена</mat-slide-toggle>
 
-      @if (bookForm.publisher().invalid() && bookForm.publisher().touched()) {
-        <mat-error>Це обов'язкове поле</mat-error>
-      }
-    </mat-form-field>
-
-    <div class="flex-row align-center justify-space-between">
-      <mat-slide-toggle [formField]="bookForm.bought">Уже куплена</mat-slide-toggle>
-      <mat-slide-toggle [formField]="bookForm.hadRead">Ще не куплена</mat-slide-toggle>
+      </div>
 
     </div>
-  </mat-dialog-content>
+
   <mat-dialog-actions align="end">
     <button mat-dialog-close
             mat-flat-button

@@ -140,7 +140,9 @@ export class Books {
 
   async openBookForm() {
     const dialogRef = this.dialog.open(BookForm, {
-      data: {},
+      data: {
+        series: this.series(),
+      },
     });
 
     dialogRef.afterClosed().subscribe(result => {
