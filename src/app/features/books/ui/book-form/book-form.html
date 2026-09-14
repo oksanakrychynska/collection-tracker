@@ -43,8 +43,8 @@
       </mat-form-field>
 
       <div class="flex-row align-center justify-space-between">
-        <p>Сканувати штрих-код</p>
         @if (!scannerOpened()) {
+          <p>Сканувати штрих-код</p>
           <button type="button"
                   mat-icon-button
                   (click)="scannerOpened.set(true)">
@@ -57,13 +57,10 @@
 
       </div>
 
-
       <div class="flex-row align-center justify-space-between">
         <mat-slide-toggle [formField]="bookForm.bought">Уже куплена</mat-slide-toggle>
         <mat-slide-toggle [formField]="bookForm.hadRead">Ще не куплена</mat-slide-toggle>
-
       </div>
-
     </div>
 
   <mat-dialog-actions align="end">

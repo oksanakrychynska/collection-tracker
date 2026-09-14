@@ -4,7 +4,7 @@ import {
   ElementRef,
   OnDestroy,
   ViewChild,
-  signal,
+  signal, output,
 } from '@angular/core';
 
 import {
@@ -20,17 +20,14 @@ import {
 })
 export class BookScanner implements AfterViewInit, OnDestroy {
 
-  @ViewChild('video')
-  video!: ElementRef<HTMLVideoElement>;
+  @ViewChild('video') video!: ElementRef<HTMLVideoElement>;
 
   readonly barcode = signal<string | null>(null);
-
   private stream?: MediaStream;
-
   private reader = new BrowserMultiFormatReader();
-
   private controls?: IScannerControls;
 
+  public closed = output<void>();
 
   async ngAfterViewInit(): Promise<void> {
     try {
@@ -40,13 +37,9 @@ export class BookScanner implements AfterViewInit, OnDestroy {
         },
         audio: false,
       });
-
       this.video.nativeElement.srcObject = this.stream;
-
       await this.video.nativeElement.play();
-
-      this.startScanning();
-
+      await this.startScanning();
     } catch (error) {
       console.error('Camera access error:', error);
     }
@@ -75,6 +68,7 @@ export class BookScanner implements AfterViewInit, OnDestroy {
     this.controls?.stop();
     this.stream?.getTracks().forEach(track => track.stop());
     this.stream = undefined;
+    this.closed.emit();
   }
 
 

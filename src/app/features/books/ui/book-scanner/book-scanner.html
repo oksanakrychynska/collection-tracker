@@ -1,25 +1,29 @@
 <div class="scanner">
-  <video
-    #video
-    autoplay
-    playsinline
-  ></video>
+  @if (!barcode()) {
+    <video
+      #video
+      autoplay
+      playsinline></video>
 
-  @if (barcode(); as code) {
-    <div class="barcode-result success">
-      <div>Штрихкод знайдено:</div>
-      <strong>{{ code }}</strong>
-    </div>
-  } @else {
-    <div class="barcode-result">
+    <div class="scanner-hint">
       Наведіть камеру на штрихкод книжки
     </div>
   }
+  @if (barcode(); as code) {
+    <div class="barcode-result">
+      <span class="barcode-result-label">
+        Штрихкод
+      </span>
 
+      <span class="barcode-result-value">
+        {{ code }}
+      </span>
+    </div>
+  }
   <button
     type="button"
-    (click)="close()"
-  >
+    class="close-button"
+    (click)="close()">
     Закрити
   </button>
 </div>
