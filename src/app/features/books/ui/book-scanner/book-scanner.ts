@@ -27,7 +27,7 @@ export class BookScanner implements AfterViewInit, OnDestroy {
   private reader = new BrowserMultiFormatReader();
   private controls?: IScannerControls;
 
-  public closed = output<void>();
+  public closed = output<any>();
 
   async ngAfterViewInit(): Promise<void> {
     try {
@@ -53,7 +53,6 @@ export class BookScanner implements AfterViewInit, OnDestroy {
       (result) => {
         if (result && !this.barcode()) {
           const value = result.getText();
-          console.log('BARCODE:', value);
           this.barcode.set(value);
           this.controls?.stop();
           this.stream?.getTracks().forEach(track => track.stop());
@@ -64,11 +63,11 @@ export class BookScanner implements AfterViewInit, OnDestroy {
   }
 
 
-  close(): void {
+  close() {
     this.controls?.stop();
     this.stream?.getTracks().forEach(track => track.stop());
     this.stream = undefined;
-    this.closed.emit();
+    this.closed.emit(this.barcode());
   }
 
 

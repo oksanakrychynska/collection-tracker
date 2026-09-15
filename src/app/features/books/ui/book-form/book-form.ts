@@ -18,8 +18,10 @@ import {MatIcon} from '@angular/material/icon';
 interface BookFormData {
   name: string;
   author: string;
+  color: string;
   seria: string;
   publisher: string;
+  barcode: string;
   bought: boolean;
   hadRead: boolean;
 }
@@ -61,12 +63,14 @@ export class BookForm {
     window.innerWidth <= 1024
   );
   readonly bookFormModel = signal<BookFormData>({
-    name: '',
-    author: '',
-    seria: '',
-    publisher: '',
-    bought: false,
-    hadRead: false,
+    name: this.data?.book?.name ?? '',
+    author: this.data?.book?.author ?? '',
+    seria: this.data?.book?.seria ?? '',
+    publisher: this.data?.book?.publisher ?? '',
+    bought: this.data?.book?.bought ?? '',
+    hadRead: this.data?.book?.hadRead ?? '',
+    barcode:  this.data?.book?.barcode ?? '',
+    color:  this.data?.book?.color ?? '#ffffff',
   });
 
   readonly bookForm = form(this.bookFormModel, (schemaPath) => {
@@ -81,5 +85,10 @@ export class BookForm {
       this.dialogRef.close(this.bookFormModel());
     }
 
+  }
+
+  protected getBarcode(event: any) {
+    this.scannerOpened.set(false)
+    console.log(event)
   }
 }

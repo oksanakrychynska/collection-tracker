@@ -152,14 +152,29 @@ export class Books {
     });
   }
 
-  protected async deleteBook(id: string) {
+   async deleteBook(id: string) {
     await this.booksService.deleteBook(id);
   }
 
 
-  protected async updateBook(book: Book, field: string, event: MatCheckboxChange) {
+   async updateBook(book: Book, field: string, event: MatCheckboxChange) {
     const changes = {[field]: event.checked};
     await this.booksService.updateBook(book.id, changes);
 
+  }
+
+   async editBook(book: Book) {
+    const dialogRef = this.dialog.open(BookForm, {
+      data: {
+        series: this.series(),
+        book,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+         this.booksService.updateBook(book.id, result);
+      }
+    });
   }
 }

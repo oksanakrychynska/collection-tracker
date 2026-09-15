@@ -1,5 +1,25 @@
 <form novalidate (ngSubmit)="save()">
-  <h2 mat-dialog-title>Додати книжку</h2>
+    <div class="flex-row align-center justify-space-between">
+      <h2 mat-dialog-title>Додати книжку</h2>
+      <div class="color-picker-container">
+        <!-- The clickable colored dot -->
+        <button
+          type="button"
+          class="color-dot"
+          [style.background-color]="bookForm.color().value()"
+          (click)="colorInput.click()"
+          title="Choose color">
+        </button>
+
+        <!-- Hidden native color input -->
+        <input
+          #colorInput
+          type="color"
+          [formField]="bookForm.color"
+          class="hidden-input"
+        />
+      </div>
+    </div>
     <div mat-dialog-content>
       <mat-form-field appearance="outline" class="width-100">
         <mat-label>Назва</mat-label>
@@ -42,7 +62,7 @@
         }
       </mat-form-field>
 
-      <div class="flex-row align-center justify-space-between">
+      <div class="flex-row align-center justify-space-between outline">
         @if (!scannerOpened()) {
           <p>Сканувати штрих-код</p>
           <button type="button"
@@ -52,14 +72,14 @@
           </button>
         }
         @if (isMobile() && scannerOpened()) {
-          <app-book-scanner (closed)="scannerOpened.set(false)" />
+          <app-book-scanner (closed)="getBarcode($event)" />
         }
 
       </div>
 
-      <div class="flex-row align-center justify-space-between">
-        <mat-slide-toggle [formField]="bookForm.bought">Уже куплена</mat-slide-toggle>
-        <mat-slide-toggle [formField]="bookForm.hadRead">Ще не куплена</mat-slide-toggle>
+      <div class="flex-row align-center justify-space-between outline margin-top-19">
+        <mat-slide-toggle [formField]="bookForm.bought">Куплена</mat-slide-toggle>
+        <mat-slide-toggle [formField]="bookForm.hadRead">Прочитана</mat-slide-toggle>
       </div>
     </div>
 

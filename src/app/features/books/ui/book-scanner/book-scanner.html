@@ -20,10 +20,12 @@
       </span>
     </div>
   }
-  <button
-    type="button"
-    class="close-button"
-    (click)="close()">
-    Закрити
-  </button>
+  @if (!barcode()) {
+    <button
+      type="button"
+      class="close-button"
+      (click)="close()">
+      Закрити
+    </button>
+  }
 </div>

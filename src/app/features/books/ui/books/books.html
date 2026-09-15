@@ -67,6 +67,13 @@
               <span class="book-status">
                 <mat-checkbox [checked]="book.bought" (change)="updateBook(book, 'bought', $event)"></mat-checkbox>
                 <mat-checkbox [checked]="book.hadRead" (change)="updateBook(book, 'hadRead', $event)"></mat-checkbox>
+
+                <button matIconButton
+                        [matTooltip]="'Редагувати'"
+                        (click)="editBook(book)"
+                        class="delete-button">
+                   <mat-icon>edit</mat-icon>
+                 </button>
                  <button matIconButton
                          [matTooltip]="'Видалити зі списку'"
                          [disabled]="book.bought"

@@ -4,6 +4,8 @@ export interface Book {
   "author": string,
   "seria": string,
   "publisher": string,
+  "barcode": string,
+  "color": string,
   "bought": boolean,
   "hadRead": boolean
 }
