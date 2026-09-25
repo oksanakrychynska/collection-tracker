@@ -88,7 +88,10 @@ export class BookForm {
   }
 
   protected getBarcode(event: any) {
-    this.scannerOpened.set(false)
-    console.log(event)
+    this.scannerOpened.set(false);
+    this.bookFormModel.update(form => ({
+      ...form,
+      event
+    }));
   }
 }

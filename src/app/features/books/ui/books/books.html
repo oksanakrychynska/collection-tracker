@@ -63,10 +63,12 @@
              </span>
               <span class="book-author">
                 <span>{{ book.author.length > 70 ? `Збірка авторів` : book.author }}</span>
+                <span class="barcode">{{ book?.barcode }}</span>
               </span>
               <span class="book-status">
-                <mat-checkbox [checked]="book.bought" (change)="updateBook(book, 'bought', $event)"></mat-checkbox>
-                <mat-checkbox [checked]="book.hadRead" (change)="updateBook(book, 'hadRead', $event)"></mat-checkbox>
+
+                <mat-icon [class.highlight]="book.hadRead" [matTooltip]="'Прочитано'">book_ribbon</mat-icon>
+<!--                <mat-checkbox [checked]="book.hadRead" (change)="updateBook(book, 'hadRead', $event)"></mat-checkbox>-->
 
                 <button matIconButton
                         [matTooltip]="'Редагувати'"

@@ -10,7 +10,6 @@ import {MatDivider, MatList, MatListItem, MatListItemIcon} from '@angular/materi
 import {MatIcon} from '@angular/material/icon';
 import {NgClass} from '@angular/common';
 import {MatTooltip} from '@angular/material/tooltip';
-import {MatCheckbox, MatCheckboxChange} from '@angular/material/checkbox';
 import {MatToolbarRow} from '@angular/material/toolbar';
 import {BookForm} from '../book-form/book-form';
 import {MatDialog} from '@angular/material/dialog';
@@ -21,7 +20,7 @@ import {SearchPanel} from '../search-panel/search-panel';
 
 @Component({
   selector: 'app-books',
-  imports: [FilterPanel, MatDrawer, MatDrawerContainer, MatDrawerContent, MatList, MatListItem, MatIcon, MatListItemIcon, MatDivider, NgClass, MatTooltip, MatCheckbox, MatToolbarRow, MatButton, MatIconButton, MatFabButton, SearchPanel],
+  imports: [FilterPanel, MatDrawer, MatDrawerContainer, MatDrawerContent, MatList, MatListItem, MatIcon, MatListItemIcon, MatDivider, NgClass, MatTooltip, MatToolbarRow, MatButton, MatIconButton, MatFabButton, SearchPanel],
   templateUrl: './books.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './books.scss',
@@ -73,7 +72,7 @@ export class Books {
         book.name.toLowerCase().includes(searchTerm.toLowerCase())
       )
     }
-
+    console.log(books);
     return [...books].sort((a, b) => {
       const result = a.name.localeCompare(b.name);
 
@@ -157,11 +156,11 @@ export class Books {
   }
 
 
-   async updateBook(book: Book, field: string, event: MatCheckboxChange) {
-    const changes = {[field]: event.checked};
-    await this.booksService.updateBook(book.id, changes);
-
-  }
+  //  async updateBook(book: Book, field: string, event: MatCheckboxChange) {
+  //   const changes = {[field]: event.checked};
+  //   await this.booksService.updateBook(book.id, changes);
+  //
+  // }
 
    async editBook(book: Book) {
     const dialogRef = this.dialog.open(BookForm, {
