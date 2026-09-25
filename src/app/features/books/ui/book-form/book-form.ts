@@ -91,7 +91,7 @@ export class BookForm {
     this.scannerOpened.set(false);
     this.bookFormModel.update(form => ({
       ...form,
-      event
+      barcode: event
     }));
   }
 }
