@@ -17,6 +17,8 @@ import {
   standalone: true,
   templateUrl: './book-scanner.html',
   styleUrl: './book-scanner.scss',
+  imports: [
+  ]
 })
 export class BookScanner implements AfterViewInit, OnDestroy {
 
@@ -54,6 +56,7 @@ export class BookScanner implements AfterViewInit, OnDestroy {
         if (result && !this.barcode()) {
           const value = result.getText();
           this.barcode.set(value);
+          this.closed.emit(this.barcode());
           this.controls?.stop();
           this.stream?.getTracks().forEach(track => track.stop());
           this.stream = undefined;

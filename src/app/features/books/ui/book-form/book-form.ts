@@ -10,7 +10,7 @@ import {MatButton, MatIconButton} from '@angular/material/button';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatError, MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {MatSlideToggle} from '@angular/material/slide-toggle';
-import {form, FormField, required} from '@angular/forms/signals';
+import {disabled, form, FormField, readonly, required} from '@angular/forms/signals';
 import {MatAutocomplete, MatAutocompleteTrigger, MatOption} from '@angular/material/autocomplete';
 import {BookScanner} from '../book-scanner/book-scanner';
 import {MatIcon} from '@angular/material/icon';
@@ -78,6 +78,7 @@ export class BookForm {
     required(schemaPath.author, {message: 'Author is required'});
     required(schemaPath.seria, {message: 'Seria is required'});
     required(schemaPath.publisher, {message: 'Publisher is required'});
+    readonly(schemaPath.barcode)
   });
 
   save(): void {
@@ -88,10 +89,12 @@ export class BookForm {
   }
 
   protected getBarcode(event: any) {
+    console.log('BARCODE', event);
     this.scannerOpened.set(false);
     this.bookFormModel.update(form => ({
       ...form,
       barcode: event
     }));
+
   }
 }

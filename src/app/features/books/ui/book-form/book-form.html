@@ -62,20 +62,28 @@
         }
       </mat-form-field>
 
-      <div class="flex-row align-center justify-space-between outline">
-        @if (!scannerOpened()) {
+      @if (!scannerOpened() && !bookForm.barcode().value()) {
+        <div class="flex-row align-center justify-space-between outline">
           <p>Сканувати штрих-код</p>
           <button type="button"
                   mat-icon-button
                   (click)="scannerOpened.set(true)">
             <mat-icon>barcode_scanner</mat-icon>
           </button>
-        }
-        @if (isMobile() && scannerOpened()) {
-          <app-book-scanner (closed)="getBarcode($event)" />
-        }
+        </div>
+      } @else if (bookForm.barcode().value()) {
+        <mat-form-field appearance="outline" class="width-100">
+          <mat-label>Штрихкод</mat-label>
+          <input [formField]="bookForm.barcode"
+                 matInput>
+        </mat-form-field>
+      }
+      @if (isMobile() && scannerOpened()) {
+        <app-book-scanner (closed)="getBarcode($event)" />
+      }
 
-      </div>
+
+
 
       <div class="flex-row align-center justify-space-between outline margin-top-19">
         <mat-slide-toggle [formField]="bookForm.bought">Куплена</mat-slide-toggle>

@@ -8,19 +8,7 @@
     <div class="scanner-hint">
       Наведіть камеру на штрихкод книжки
     </div>
-  }
-  @if (barcode(); as code) {
-    <div class="barcode-result">
-      <span class="barcode-result-label">
-        Штрихкод
-      </span>
 
-      <span class="barcode-result-value">
-        {{ code }}
-      </span>
-    </div>
-  }
-  @if (!barcode()) {
     <button
       type="button"
       class="close-button"

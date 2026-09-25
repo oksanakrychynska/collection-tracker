@@ -172,6 +172,7 @@ export class Books {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
+        console.log(result);
          this.booksService.updateBook(book.id, result);
       }
     });
